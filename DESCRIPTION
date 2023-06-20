@@ -1,0 +1,18 @@
+Package: undercover
+Title: Proxy Scraping
+Version: 0.0.1
+Authors@R: 
+    person("Tan", "Ho", , "tan@tanho.ca", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8388-5155"))
+Description: Utilities for making http requests through a proxy, including
+    api-like services.
+License: MIT + file LICENSE
+Depends: 
+    R (>= 4.1.1)
+Imports:
+    cli,
+    httr,
+    rlang
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
