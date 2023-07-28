@@ -12,7 +12,7 @@
 scrapeops_request <- function(url,
                               ...,
                               api_key = Sys.getenv("SCRAPEOPS_API_KEY"),
-                              user_agent = NULL){
+                              user_agent = scrapeops_fake_useragent()){
 
   stopifnot(
     !is.character(api_key) && nchar(api_key) > 0,
