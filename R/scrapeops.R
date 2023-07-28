@@ -15,8 +15,8 @@ scrapeops_request <- function(url,
                               user_agent = scrapeops_fake_useragent()){
 
   stopifnot(
-    !is.character(api_key) && nchar(api_key) > 0,
-    !is.character(url) && length(url) == 1
+    is.character(api_key) && nchar(api_key) > 0,
+    is.character(url) && length(url) == 1
   )
 
   access_url <- httr::modify_url(
