@@ -9,7 +9,10 @@
 #' @inheritDotParams .request
 #'
 #' @export
-scrapeops_request <- function(url, ..., api_key = Sys.getenv("SCRAPEOPS_API_KEY")){
+scrapeops_request <- function(url,
+                              ...,
+                              api_key = Sys.getenv("SCRAPEOPS_API_KEY"),
+                              user_agent = NULL){
 
   stopifnot(
     !is.character(api_key) && nchar(api_key) > 0,
@@ -32,7 +35,7 @@ scrapeops_request <- function(url, ..., api_key = Sys.getenv("SCRAPEOPS_API_KEY"
     )
   )
 
-  resp <- .request(url = access_url, ..., log_url = url)
+  resp <- .request(url = access_url, ..., log_url = url, user_agent = user_agent)
 
   resp <- .scrapeops_redact(resp, redacted_url)
 
@@ -45,4 +48,23 @@ scrapeops_request <- function(url, ..., api_key = Sys.getenv("SCRAPEOPS_API_KEY"
   attr(resp, "response")$request$url <- redacted_url
   attr(resp, "undercover_provider") <- "scrapeops"
   return(resp)
+}
+
+
+#' Query Fake User Agent from ScrapeOps.io
+#'
+#' @param api_key ScrapeOps API key, defaults to env var `SCRAPEOPS_API_KEY`
+#'
+#' @return ScrapeOps API returns 10 fake user agents. The function choses one
+#'   of them randomly and returns it.
+#' @export
+scrapeops_fake_useragent <- function(api_key = Sys.getenv("SCRAPEOPS_API_KEY")){
+  resp <- httr::GET(
+    url = "http://headers.scrapeops.io/v1/user-agents",
+    query = list(api_key = api_key)
+  )
+
+  httr::content(resp, as = "parsed") |>
+    unlist(use.names = FALSE) |>
+    sample(1)
 }

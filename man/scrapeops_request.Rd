@@ -4,7 +4,12 @@
 \alias{scrapeops_request}
 \title{Scrape with ScrapeOps.io}
 \usage{
-scrapeops_request(url, ..., api_key = Sys.getenv("SCRAPEOPS_API_KEY"))
+scrapeops_request(
+  url,
+  ...,
+  api_key = Sys.getenv("SCRAPEOPS_API_KEY"),
+  user_agent = NULL
+)
 }
 \arguments{
 \item{url}{Full URL to be scraped}
@@ -14,9 +19,11 @@ scrapeops_request(url, ..., api_key = Sys.getenv("SCRAPEOPS_API_KEY"))
   \describe{
     \item{\code{verb}}{character: a curl verb supported by httr, e.g. GET, POST, PUT, DELETE
 this is passed to \code{httr::RETRY()}. Defaults to \code{"GET"}}
+    \item{\code{retry_delay}}{Minimum time to wait before retrying. Defaults to \code{1} second.}
     \item{\code{retry_times}}{Maximum number of attempts. Defaults to \code{3}.}
     \item{\code{log_url}}{url for print logging, defaults to \code{url}}
     \item{\code{verbose}}{whether to print out URLs, default = FALSE}
+    \item{\code{user_agent}}{The user agent to pass on to \code{httr::user_agent()}}
   }}
 
 \item{api_key}{ScrapeOps API key, defaults to env var SCRAPEOPS_API_KEY}
