@@ -10,6 +10,7 @@
 #' @param retry_times Maximum number of attempts. Defaults to \code{3}.
 #' @param log_url url for print logging, defaults to `url`
 #' @param verbose whether to print out URLs, default = FALSE
+#' @param user_agent The user agent to pass on to `httr::user_agent()`
 #'
 #' @export
 .request <- function(url,
@@ -18,7 +19,8 @@
                     retry_delay = 1L,
                     retry_times = 3L,
                     log_url = url,
-                    verbose = getOption("undercover.verbose", FALSE)){
+                    verbose = getOption("undercover.verbose", FALSE),
+                    user_agent = NULL){
 
   stopifnot(
     is.character(url) && length(url) == 1,

@@ -11,7 +11,8 @@
   retry_delay = 1L,
   retry_times = 3L,
   log_url = url,
-  verbose = getOption("undercover.verbose", FALSE)
+  verbose = getOption("undercover.verbose", FALSE),
+  user_agent = NULL
 )
 }
 \arguments{
@@ -22,11 +23,15 @@
 \item{verb}{character: a curl verb supported by httr, e.g. GET, POST, PUT, DELETE
 this is passed to \code{httr::RETRY()}. Defaults to \code{"GET"}}
 
+\item{retry_delay}{Minimum time to wait before retrying. Defaults to \code{1} second.}
+
 \item{retry_times}{Maximum number of attempts. Defaults to \code{3}.}
 
 \item{log_url}{url for print logging, defaults to \code{url}}
 
 \item{verbose}{whether to print out URLs, default = FALSE}
+
+\item{user_agent}{The user agent to pass on to \code{httr::user_agent()}}
 }
 \description{
 Formats http request with RETRY and customizable logging
