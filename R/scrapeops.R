@@ -4,34 +4,38 @@
 #'
 #' @param url Full URL to be scraped
 #' @param ... arguments to pass to `.request()`
-#' @param api_key ScrapeOps API key, defaults to env var SCRAPEOPS_API_KEY
+#' @param scrapeops_options list: key-value list of options, see <https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/advanced-functionality/functionality-list/>
+#' @param api_key ScrapeOps API key, defaults to envvar SCRAPEOPS_API_KEY
 #'
 #' @inheritDotParams .request
+#' @seealso [ScrapeOps docs](https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/quickstart/)
 #'
 #' @export
 scrapeops_request <- function(url,
                               ...,
+                              scrapeops_options = list(),
                               api_key = Sys.getenv("SCRAPEOPS_API_KEY"),
                               user_agent = scrapeops_fake_useragent()){
 
   stopifnot(
+    is.character(url) && length(url) == 1,
     is.character(api_key) && nchar(api_key) > 0,
-    is.character(url) && length(url) == 1
+    is.null(scrapeops_options) || is.list(scrapeops_options)
   )
 
   access_url <- httr::modify_url(
     url = "https://proxy.scrapeops.io/v1/",
-    query = list(
-      api_key = api_key,
-      url = url
+    query = c(
+      list(api_key = api_key, url = url),
+      scrapeops_options
     )
   )
 
   redacted_url <- httr::modify_url(
-    "https://proxy.scrapeops.io/v1/",
-    query = list(
-      api_key = "scrapeops_api_key",
-      url = url
+    url = "https://proxy.scrapeops.io/v1/",
+    query = c(
+      list(api_key = api_key, url = url),
+      scrapeops_options
     )
   )
 

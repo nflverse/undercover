@@ -7,6 +7,7 @@
 scrapeops_request(
   url,
   ...,
+  scrapeops_options = list(),
   api_key = Sys.getenv("SCRAPEOPS_API_KEY"),
   user_agent = scrapeops_fake_useragent()
 )
@@ -26,8 +27,13 @@ this is passed to \code{httr::RETRY()}. Defaults to \code{"GET"}}
     \item{\code{user_agent}}{The user agent to pass on to \code{httr::user_agent()}}
   }}
 
-\item{api_key}{ScrapeOps API key, defaults to env var SCRAPEOPS_API_KEY}
+\item{scrapeops_options}{list: key-value list of options, see \link{https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/advanced-functionality/functionality-list/}}
+
+\item{api_key}{ScrapeOps API key, defaults to envvar SCRAPEOPS_API_KEY}
 }
 \description{
 Adds ScrapeOps proxy api service to \code{.request()} call.
+}
+\seealso{
+\href{https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/quickstart/}{ScrapeOps docs}
 }
