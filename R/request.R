@@ -53,7 +53,6 @@
 
   if(httr::http_error(resp)){
     cli::cli_warn("ERROR: {httr::http_status(resp)$message} \n URL:{log_url}")
-    out <- character()
   }
 
   if (!httr::http_error(resp) && !is.null(content_as)) {
