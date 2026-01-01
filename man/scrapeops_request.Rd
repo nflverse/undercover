@@ -22,12 +22,16 @@ scrapeops_request(
 this is passed to \code{httr::RETRY()}. Defaults to \code{"GET"}}
     \item{\code{retry_delay}}{Minimum time to wait before retrying. Defaults to \code{1} second.}
     \item{\code{retry_times}}{Maximum number of attempts. Defaults to \code{3}.}
+    \item{\code{content_as}}{choice: how to parse the content of the response, one of:
+"text", "parsed", "raw", or NULL to skip parsing content}
+    \item{\code{content_encoding}}{string: passed to \code{httr::content} as \code{encoding} argument}
+    \item{\code{content_type}}{string: passed to \code{httr::content} as \code{type} argument}
     \item{\code{log_url}}{url for print logging, defaults to \code{url}}
     \item{\code{verbose}}{whether to print out URLs, default = FALSE}
     \item{\code{user_agent}}{The user agent to pass on to \code{httr::user_agent()}}
   }}
 
-\item{scrapeops_options}{list: key-value list of options, see \link{https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/advanced-functionality/functionality-list/}}
+\item{scrapeops_options}{list: key-value list of options, see \url{https://scrapeops.io/docs/web-scraping-proxy-api-aggregator/advanced-functionality/functionality-list/}}
 
 \item{api_key}{ScrapeOps API key, defaults to envvar SCRAPEOPS_API_KEY}
 }
