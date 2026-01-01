@@ -34,7 +34,7 @@ scrapeops_request <- function(url,
   redacted_url <- httr::modify_url(
     url = "https://proxy.scrapeops.io/v1/",
     query = c(
-      list(api_key = api_key, url = url),
+      list(url = url),
       scrapeops_options
     )
   )
