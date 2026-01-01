@@ -10,6 +10,9 @@
   verb = "GET",
   retry_delay = 1L,
   retry_times = 3L,
+  content_as = "text",
+  content_encoding = "UTF-8",
+  content_type = NULL,
   log_url = url,
   verbose = getOption("undercover.verbose", FALSE),
   user_agent = NULL
@@ -26,6 +29,13 @@ this is passed to \code{httr::RETRY()}. Defaults to \code{"GET"}}
 \item{retry_delay}{Minimum time to wait before retrying. Defaults to \code{1} second.}
 
 \item{retry_times}{Maximum number of attempts. Defaults to \code{3}.}
+
+\item{content_as}{choice: how to parse the content of the response, one of:
+"text", "parsed", "raw", or NULL to skip parsing content}
+
+\item{content_encoding}{string: passed to \code{httr::content} as \code{encoding} argument}
+
+\item{content_type}{string: passed to \code{httr::content} as \code{type} argument}
 
 \item{log_url}{url for print logging, defaults to \code{url}}
 
